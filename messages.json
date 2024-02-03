@@ -1,0 +1,45 @@
+{
+    "correspondants": [
+        {
+            "id": "123456",
+            "name": "Alexandre"
+        },
+        {
+            "id": "654321",
+            "name": "Tanguy (You)"
+        }
+
+    ],
+    "messages": [
+        {
+            "id": 1,
+            "sender": "123456",
+            "sentAt": "2024-02-02T10:21:46Z",
+            "content": "Salut ! Comment ça va ?"
+        },
+        {
+            "id": 2,
+            "sender": "654321",
+            "sentAt": "2024-02-02T10:24:57Z",
+            "content": "Bah ecoute tranquille et toi ?"
+        },
+        {
+            "id": 3,
+            "sender": "123456",
+            "sentAt": "2024-02-02T10:25:21Z",
+            "content": "Je passe ma vie sur Rocket League, donc mon cycle de sommeil est horrible mais je suis heureux haha"
+        },
+        {
+            "id": 4,
+            "sender": "654321",
+            "sentAt": "2024-02-02T10:25:58Z",
+            "content": "La belle vie alors !"
+        },
+        {
+            "id": 5,
+            "sender": "654321",
+            "sentAt": "2024-02-02T10:34:57Z",
+            "content": "Je sens que je vais te suivre, on se fait une partie aujourd'hui ?"
+        }
+    ]
+}
