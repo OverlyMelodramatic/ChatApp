@@ -32,9 +32,11 @@ func postMessage(c *gin.Context) {
 }
 
 func getMessages(c *gin.Context) {
-	var other = user{
-		ID:   "123456",
-		Name: "Alexandre",
+	var correspondants = []user{
+		{
+			ID:   "123456",
+			Name: "Alexandre",
+		},
 	}
 	var lastMessages = []message{
 		{
@@ -69,7 +71,7 @@ func getMessages(c *gin.Context) {
 		},
 	}
 	c.HTML(http.StatusOK, "messages.html", gin.H{
-		"correspondants": other,
+		"correspondants": correspondants,
 		"messages":       lastMessages,
 	})
 }
@@ -83,7 +85,8 @@ func main() {
 	router.POST("/messages", postMessage)
 
 	router.Static("/css", "./templates/css")
-	router.StaticFile("favicon.ico", "./assets/favicon.ico")
+	router.Static("/assets", "./assets")
+	router.StaticFile("favicon.ico", "./favicon.ico")
 	router.LoadHTMLGlob("templates/html/*")
 
 	router.Run("localhost:8080")

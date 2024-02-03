@@ -3,29 +3,29 @@
     <head>
         <title>ChatApp</title>
         <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css"
+        />
         <script src="https://unpkg.com/htmx.org@1.9.10" 
                 integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
                 crossorigin="anonymous"></script>
     </head>
     <body class="container">
-        <button class='btn' 
-                hx-get="messages"
-                hx-target="#conversation-space"
-                hx-swap="outerHTML">
-            Reload Conversation
-        </button>
         <div id="conversation-space"
             hx-get="/messages"
             hx-target="#conversation-space"
             hx-trigger="load once"
+            hx-indicator="#conversation-spinner"
             hx-swap="innerHTML">
-            <div class="htmx-indicator ">
         </div>
-        <form id="user-input">
-            <textarea id="message-input" placeholder="Write an answer"></textarea>
+        <article id="conversation-spinner" class="htmx-indicator" aria-busy="true"></article>
+        <form id="user-input" role="group" hx-post="/messages" hx-encoding="multipart/form-data">
+            <input id="message-input" class="resize-none" name="message" placeholder="Write an answer"></input>
             <button id="post-button"
-                    hx-post="messages"
-                    hx-trigger="submit">Post</button>
+                class="send-button"
+                hx-trigger="click">
+                Send
+            </button>
         </form>
     </body>
 </html>
