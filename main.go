@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,10 @@ func getIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
 }
 
+func postMessage(c *gin.Context) {
+	log.Println(c.Request.Body)
+}
+
 func getMessages(c *gin.Context) {
 	var other = user{
 		ID:   "123456",
@@ -34,31 +39,31 @@ func getMessages(c *gin.Context) {
 	var lastMessages = []message{
 		{
 			ID:      "1",
-			Sender:  "123456",
+			Sender:  "them",
 			SentAt:  "2024-02-02T10:21:46Z",
 			Content: "Salut ! Comment ça va ?",
 		},
 		{
 			ID:      "2",
-			Sender:  "654321",
+			Sender:  "you",
 			SentAt:  "2024-02-02T10:24:57Z",
 			Content: "Bah ecoute tranquille et toi ?",
 		},
 		{
 			ID:      "3",
-			Sender:  "123456",
+			Sender:  "them",
 			SentAt:  "2024-02-02T10:25:21Z",
 			Content: "Je passe ma vie sur Rocket League, donc mon cycle de sommeil est horrible mais je suis heureux haha",
 		},
 		{
 			ID:      "4",
-			Sender:  "654321",
+			Sender:  "you",
 			SentAt:  "2024-02-02T10:25:58Z",
 			Content: "La belle vie alors !",
 		},
 		{
 			ID:      "5",
-			Sender:  "654321",
+			Sender:  "you",
 			SentAt:  "2024-02-02T10:34:57Z",
 			Content: "Je sens que je vais te suivre, on se fait une partie aujourd'hui ?",
 		},
@@ -72,9 +77,14 @@ func getMessages(c *gin.Context) {
 func main() {
 	router := gin.Default()
 	gin.SetMode(gin.DebugMode)
+
 	router.GET("/", getIndex)
 	router.GET("/messages", getMessages)
+	router.POST("/messages", postMessage)
+
 	router.Static("/css", "./templates/css")
+	router.StaticFile("favicon.ico", "./assets/favicon.ico")
 	router.LoadHTMLGlob("templates/html/*")
+
 	router.Run("localhost:8080")
 }
