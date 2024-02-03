@@ -23,7 +23,7 @@ type user struct {
 // *************************** Controller ***************************
 
 func getMessages(c *gin.Context) {
-	var alex = user{
+	var other = user{
 		ID:   "123456",
 		Name: "Alexandre",
 	}
@@ -60,7 +60,7 @@ func getMessages(c *gin.Context) {
 		},
 	}
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"correspondants": alex,
+		"correspondants": other,
 		"messages":       lastMessages,
 	})
 }
