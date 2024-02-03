@@ -22,6 +22,10 @@ type user struct {
 
 // *************************** Controller ***************************
 
+func getIndex(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", nil)
+}
+
 func getMessages(c *gin.Context) {
 	var other = user{
 		ID:   "123456",
@@ -59,7 +63,7 @@ func getMessages(c *gin.Context) {
 			Content: "Je sens que je vais te suivre, on se fait une partie aujourd'hui ?",
 		},
 	}
-	c.HTML(http.StatusOK, "index.html", gin.H{
+	c.HTML(http.StatusOK, "messages.html", gin.H{
 		"correspondants": other,
 		"messages":       lastMessages,
 	})
@@ -68,8 +72,9 @@ func getMessages(c *gin.Context) {
 func main() {
 	router := gin.Default()
 	gin.SetMode(gin.DebugMode)
+	router.GET("/", getIndex)
 	router.GET("/messages", getMessages)
 	router.Static("/css", "./templates/css")
-	router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("templates/html/*")
 	router.Run("localhost:8080")
 }
