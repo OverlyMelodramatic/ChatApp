@@ -1,0 +1,21 @@
+<form id="send-message-form" 
+    hx-post="/message" 
+    hx-on::after-request="if(event.detail.successful) {this.reset()}"
+    hx-target="#send-message-form"
+    role="group"
+    hx-swap="outerHTML">
+    {{if .error}}
+        <small class="error-message" id="message-input-error">{{.error}}</small>
+    {{end}}
+    <div id="user-input" role="group">
+        <input id="message-input" type="text" name="message" placeholder="Write an answer"
+            {{if .error}}
+                aria-invalid="true"
+                aria-describedby="message-input-error"
+            {{end}}
+            autocomplete="off">
+        <input type="submit" id="post-button"
+            class="send-button"
+            value="Send">
+    </div>
+</form>

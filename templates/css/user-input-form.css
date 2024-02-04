@@ -1,0 +1,14 @@
+#send-message-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#message-input-with-validation {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.error-message {
+    color: var(--pico-form-element-invalid-active-border-color);
+}
