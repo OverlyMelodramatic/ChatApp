@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    margin-top: auto;
 }
 
 html, body {
@@ -9,63 +9,50 @@ html, body {
 }
 
 #conversation-space {
-    width: 50%;
+    width: 70%;
     align-self: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scroll-snap-type: y proximity;
+
+    .correspondants-name {
+        margin: var(--pico-typography-spacing-vertical);
+    }
+
+    .reverse-scroll {
+        overflow: auto;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+    .conversation-messages {
+        line-height: normal;
+        display: flex;
+        flex-direction: column;
+    }
 
     .message {
         max-width: 70%;
-        padding: 0.3em 1em 0.3em 1em;
-        border-radius: 10px;
-        color: white;
+        border-radius: 20px;
         justify-self: center;
     }
-
+    
     .you {
-        background-color: #017fc0;
+        background-color: var(--pico-primary-background);
         align-self: self-end;
         text-align: right;
+        padding: 0 0.3em 0 0.6em;
     }
     
     .them {
-        background-color: darkgray;
         align-self: self-start;
         text-align: left;
+        padding: 0 0.6em 0 0.3em;
     }
-    display: flex;
-    flex-direction: column;
-    margin: 1em;
-}
 
-#user-input {
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
+    .sent-at {
+        font-size: small;
+    }
 }
-
-.resize-none {
-    resize: none;
-}
-
-textarea {
-    resize: none;
-}
-
-.send-buton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    justify-self: center;
-    background-image: url(/assets/send.svg);
-}
-
-.feather {
-    width: 24px;
-    height: 24px;
-    stroke: white;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-  }

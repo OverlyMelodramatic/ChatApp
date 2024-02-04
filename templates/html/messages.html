@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <body>
-    <h3 class="display-6">{{range .correspondants }}{{.Name}}{{end}}</h3>
-    {{ range .messages }}
-        <article id="{{.ID}}" class="{{.Sender}} message">{{ .Content }}</article>
-    {{ end }}
+    <h3 id="correspondants-name" class="display-6 correspondants-name">{{range .correspondants }}{{.Name}}{{end}}</h3>
+    <div id="reverse-scroll" class="reverse-scroll">
+        <div id="conversation-messages" class="conversation-messages">
+            {{ range .messages}}
+                <article id="{{.ID}}-container" class="message {{.Sender}}">
+                    <small id="{{.ID}}-sentAt" class="sent-at">{{.SentAt | formatAsTime}}</small>
+                    <p id="{{.ID}}-content">{{ .Content }}</p>
+                </article>
+            {{ end }}
+        </div>
+    </div>
 </body>
