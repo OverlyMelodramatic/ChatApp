@@ -9,9 +9,6 @@ html, body {
 }
 
 #conversation-space {
-    width: 70%;
-    align-self: center;
-    align-items: center;
     display: flex;
     flex-direction: column;
     overflow: auto;

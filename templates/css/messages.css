@@ -1,5 +1,6 @@
 .correspondants-name {
     margin: var(--pico-typography-spacing-vertical);
+    align-self: center;
 }
 
 .reverse-scroll {
@@ -17,7 +18,6 @@
 .message {
     max-width: 70%;
     border-radius: 20px;
-    justify-self: center;
 }
 
 .you {
