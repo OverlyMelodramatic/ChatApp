@@ -125,10 +125,10 @@ func main() {
 	router.GET("/messages", getMessages)
 	router.POST("/messages", postMessage)
 
-	router.Static("/css", "./templates/css")
-	router.Static("/assets", "./assets")
-	router.StaticFile("favicon.ico", "./favicon.ico")
-	router.LoadHTMLGlob("templates/html/*")
+	router.Static("/css", "../templates/css")
+	router.Static("/assets", "../assets")
+	router.StaticFile("favicon.ico", "../favicon.ico")
+	router.LoadHTMLGlob("../templates/html/*")
 
 	router.Run("localhost:80")
 }

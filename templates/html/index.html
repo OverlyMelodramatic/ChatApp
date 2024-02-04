@@ -19,13 +19,13 @@
             hx-swap="innerHTML">
         </div>
         <article id="conversation-spinner" class="htmx-indicator" aria-busy="true"></article>
-        <form id="user-input" role="group" hx-post="/messages" hx-encoding="multipart/form-data">
+        <form id="user-input" role="group" hx-post="/messages">
             <input id="message-input" class="resize-none" name="message" placeholder="Write an answer"></input>
-            <button id="post-button"
+            <input type="submit" id="post-button"
                 class="send-button"
+                value="Send"
                 hx-trigger="click">
-                Send
-            </button>
+        </input>
         </form>
     </body>
 </html>
