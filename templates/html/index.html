@@ -2,24 +2,57 @@
 <html lang="en">
     <head>
         <title>ChatApp</title>
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
         <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="css/messages.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="css/user-input-form.css" media="screen" />
 
         <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css"
-        />
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css"/>
         <script src="https://unpkg.com/htmx.org@1.9.10" 
-                integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
-                crossorigin="anonymous"></script>
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
+        crossorigin="anonymous"></script>
     </head>
-    <body id="container" class="container">
-        <div id="conversation-space"
-            hx-get="/messages"
-            hx-target="#conversation-space"
-            hx-trigger="load once"
-            hx-swap="innerHTML">
-        </div>
-        {{template "user-input-form.html"}}
+    <body id="container" class="container" hx-get="/login" hx-target="this" hx-trigger="load once" hx-swap="beforeend">
+        <nav>
+            <ul>
+                <li><h1 id="app-title">ChatApp</h1></li>
+            </ul>
+            <ul>
+                <li>
+                    <button id="logout-button" class="outline contrast" 
+                    hx-post="/logout" 
+                    hx-target="body" 
+                    hx-swap="beforeend">Logout</button>
+                </li>
+            </ul>
+        </nav>
+        <section id="conversation-space"
+        hx-get="/messages"
+        hx-target="this"
+        hx-trigger="load once"
+        hx-target-401="body"
+        hx-swap-401="beforeend"
+        hx-swap="outerHTML">
+        </section>
+        <form id="send-message-form" 
+        hx-post="/message"
+        hx-target="#conversation-messages"
+        hx-swap="beforeend"
+        hx-target-401="body"
+        hx-swap-401="beforeend"
+        hx-on::after-request="if(event.detail.successful) {this.reset()}"
+        role="group">
+            <div id="user-input" role="group">
+                <input id="message-input" type="text" name="message" placeholder="..."
+                aria-describedby="message-input-error"
+                autofocus
+                required
+                autocomplete="off">
+                <button id="send-button" 
+                value=""
+                type="submit" 
+                hx-trigger="keyup[enterKey] from:html">
+            </div>
+        </form>
     </body>
 </html>

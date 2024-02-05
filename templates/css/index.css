@@ -1,7 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin-top: auto;
 }
 
 html, body {
@@ -11,6 +10,29 @@ html, body {
 #conversation-space {
     display: flex;
     flex-direction: column;
-    overflow: auto;
     scroll-snap-type: y proximity;
 }
+
+#send-message-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#message-input-with-validation {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#send-button {
+    background-image: url('../assets/send.svg');
+    background-position: center;
+    background-color: var(--pico-primary);
+}
+
+#login-buttons {
+    width: 50%;
+    gap: 0.5em;
+}
+
+

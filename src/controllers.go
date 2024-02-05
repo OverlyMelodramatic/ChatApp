@@ -3,25 +3,50 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
+
+var isLoggedIn = false
 
 func getIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
 }
 
 func postMessage(c *gin.Context) {
-	var message string = c.PostForm("message")
-	var templateArgs gin.H = nil
-	if message == "" {
-		templateArgs = gin.H{
-			"error": "Cannot send an empty message",
-		}
+	var recieved string = c.PostForm("message")
+	if recieved == "" {
+		c.String(http.StatusBadRequest, "Cannot send an empty message")
 	} else {
-		log.Printf("New Message posted by user: %v", message)
+		c.HTML(http.StatusAccepted, "message.html", message{
+			ID:     "10",
+			Sender: "you",
+			// TODO: export this layout in a constants file
+			SentAt:  time.Now().Format("2006-01-02T15:04:05.000Z"),
+			Content: recieved,
+		})
 	}
-	c.HTML(http.StatusOK, "user-input-form.html", templateArgs)
+}
+
+func postLogout(c *gin.Context) {
+	log.Println("a user just logout :(")
+	isLoggedIn = false
+	c.HTML(http.StatusAccepted, "login-modal.html", nil)
+}
+
+func getLogin(c *gin.Context) {
+	if !isLoggedIn {
+		c.HTML(http.StatusAccepted, "login-modal.html", nil)
+	} else {
+		c.Writer.WriteHeader(http.StatusAccepted)
+	}
+}
+
+func postLogin(c *gin.Context) {
+	identifiedUsername := c.PostForm("email")
+	log.Printf("we have found ourselves a new user :) their name is %v", identifiedUsername)
+	isLoggedIn = true
 }
 
 func getMessages(c *gin.Context) {
@@ -87,7 +112,7 @@ func getMessages(c *gin.Context) {
 			Content: "C'était cool, faut qu'on se refasse ça!",
 		},
 	}
-	c.HTML(http.StatusOK, "messages.html", gin.H{
+	c.HTML(http.StatusOK, "conversation.html", gin.H{
 		"correspondants": correspondants,
 		"messages":       lastMessages,
 	})
