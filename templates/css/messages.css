@@ -1,7 +1,3 @@
-#correspondants-name {
-    align-self: center;
-}
-
 .reverse-scroll {
     display: flex;
     flex-direction: column-reverse;

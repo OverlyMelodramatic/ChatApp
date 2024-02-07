@@ -30,9 +30,9 @@ html, body {
     background-color: var(--pico-primary);
 }
 
-#login-buttons {
-    width: 50%;
-    gap: 0.5em;
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 

@@ -5,10 +5,13 @@ import (
 	"time"
 )
 
+const (
+	DatetimeLayout = "2006-01-02T15:04:05.000Z"
+)
+
 func fomartAsTime(t string) (string, error) {
 	// TODO: export this layout in a constants file
-	layout := "2006-01-02T15:04:05.000Z"
-	var ti, err = time.Parse(layout, t)
+	var ti, err = time.Parse(DatetimeLayout, t)
 	if err != nil {
 		return "", err
 	}

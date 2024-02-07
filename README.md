@@ -15,3 +15,10 @@ Either way, You can then access the application on **localhost**
 - Recieve messages on real time, through either Websockets or SSEs
 - Deploy this app to the cloud, or at least to GitHub Pages
 - Be able to use this app with HTTPS
+
+## Current TODOs
+- Add an JWT token based auth to the backend
+- Add a mongoDB database
+- Beatufiy the CSS when a user send multiple messages
+- Add a .env for the environment variables (currently in constants at top of their respective files)
+- Add some unit tests

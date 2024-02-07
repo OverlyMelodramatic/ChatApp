@@ -23,7 +23,7 @@ func postMessage(c *gin.Context) {
 			ID:     "10",
 			Sender: "you",
 			// TODO: export this layout in a constants file
-			SentAt:  time.Now().Format("2006-01-02T15:04:05.000Z"),
+			SentAt:  time.Now().Format(DatetimeLayout),
 			Content: recieved,
 		})
 	}
@@ -44,6 +44,20 @@ func getLogin(c *gin.Context) {
 }
 
 func postLogin(c *gin.Context) {
+	identifiedUsername := c.PostForm("email")
+	log.Printf("we have found ourselves a new user :) their name is %v", identifiedUsername)
+	isLoggedIn = true
+}
+
+func getSignup(c *gin.Context) {
+	if !isLoggedIn {
+		c.HTML(http.StatusAccepted, "signup-modal.html", nil)
+	} else {
+		c.Writer.WriteHeader(http.StatusAccepted)
+	}
+}
+
+func postSignup(c *gin.Context) {
 	identifiedUsername := c.PostForm("email")
 	log.Printf("we have found ourselves a new user :) their name is %v", identifiedUsername)
 	isLoggedIn = true
