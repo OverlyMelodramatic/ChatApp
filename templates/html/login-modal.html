@@ -1,0 +1,35 @@
+<dialog id="modal" open>
+	<article>
+		<header>
+			<h1 id="login-form-title">Please Log In</h1>
+		</header>
+		<form id="login-form"
+		hx-post="/login"
+        hx-target="#modal"
+		hx-swap="outerHTML"
+		>
+			<fieldset id="login-form-email-container" class="form-container">
+				<label id="login-form-email-label" for="login-form-email-input">Email:</label>
+				<input id="login-form-email-input" 
+				name="email" 
+				type="email" 
+				autocomplete="email"
+				autofocus 
+				required>
+			</fieldset>
+			<fieldset id="login-form-password-container" class="form-container">
+				<label id="login-form-password-label" for="login-form-password-input">Password:</label>
+				<input id="login-form-password-input" 
+				type="password"
+				name="password"
+				autocomplete="current-password"
+				required>
+			</fieldset>
+			<footer id="login-buttons">
+				<button id="submit-login-form" type="submit">Log In</button>
+				<a id="signup-link" hx-get="/signup" hx-target="#modal" hx-swap="outerHTML">Don't have an account? Create One</a>
+			</footer>
+		</from>
+	</article>
+	<script src="js/token.js"></script>
+</dialog>

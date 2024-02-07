@@ -1,31 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="main-page">
     <head>
         <title>ChatApp</title>
+        <meta name="color-scheme" content="light dark" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
         <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/messages.css" media="screen" />
+
+        <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.pink.min.css"/>
         <script src="https://unpkg.com/htmx.org@1.9.10" 
-                integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
-                crossorigin="anonymous"></script>
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
+        crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     </head>
-    <body class="container">
-        <button class='btn' 
-                hx-get="messages"
-                hx-target="#conversation-space"
-                hx-swap="outerHTML">
-            Reload Conversation
-        </button>
-        <div id="conversation-space"
-            hx-get="/messages"
-            hx-target="#conversation-space"
-            hx-trigger="load once"
-            hx-swap="innerHTML">
-            <div class="htmx-indicator ">
-        </div>
-        <form id="user-input">
-            <textarea id="message-input" placeholder="Write an answer"></textarea>
-            <button id="post-button"
-                    hx-post="messages"
-                    hx-trigger="submit">Post</button>
+    <body id="container" class="container" hx-get="/login" hx-target="this" hx-trigger="load once" hx-swap="beforeend">
+        <nav>
+            <ul>
+                <li>
+                    <h1 id="app-title">ChatApp</h1>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <img id="theme-switch" alt="Toggle the theme" aria-label="Toggle the theme"/>
+                </li>
+                <li>
+                    <button id="logout-button" class="outline" 
+                    hx-post="/logout" 
+                    hx-target="body"
+                    hx-swap="beforeend">Logout</button>
+                </li>
+            </ul>
+        </nav>
+        <section id="conversation-space"
+        hx-get="/messages"
+        hx-target="this"
+        hx-trigger="load once"
+        hx-swap="outerHTML">
+        </section>
+        <form id="send-message-form" 
+        hx-post="/message"
+        hx-target="#conversation-messages"
+        hx-swap="beforeend"
+        hx-target-401="#message-input-error"
+        hx-on::after-request="if(event.detail.successful) {this.reset()}"
+        role="group">
+            <small id="message-input-error" hidden></small>
+            <div id="user-input" role="group">
+                <input id="message-input" type="text" name="message" placeholder="..."
+                aria-describedby="message-input-error"
+                autofocus
+                spellcheck="true"
+                onkeyup="if (this.value) {document.getElementById('send-button').removeAttribute('disabled')} else {document.getElementById('send-button').setAttribute('disabled', 'true');}"
+                required
+                autocomplete="off">
+                <button id="send-button" 
+                value=""
+                type="submit"
+                disabled
+                hx-trigger="keyup[enterKey] from:html">
+            </div>
         </form>
     </body>
+    <script src="js/theme.js"></script>
 </html>

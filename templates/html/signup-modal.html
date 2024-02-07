@@ -1,0 +1,63 @@
+<dialog id="modal" open>
+	<article>
+		<header>
+			<h1 id="signup-form-title">Please Sign Up</h1>
+		</header>
+		<form id="signup-form"
+		hx-post="/signup"
+        hx-target="#modal"
+		hx-swap="outerHTML"
+        hx-target-400="error-message"
+		>
+			<fieldset id="signup-form-email-container" class="form-container">
+				<label id="signup-form-email-label" for="signup-form-email-input">Email:</label>
+				<input id="signup-form-email-input" 
+				name="email" 
+				type="email" 
+				autocomplete="email"
+				autofocus 
+				required>
+			</fieldset>
+			<fieldset id="signup-form-password-container" class="form-container">
+				<label id="signup-form-password-label" for="signup-form-password-input">Password:</label>
+				<input id="signup-form-password-input" 
+				type="password"
+				name="password"
+				minlength="8"
+				pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+				autocomplete="new-password"
+				required>
+			</fieldset>
+			<fieldset id="signup-form-password-confirm-container" class="form-container">
+				<label id="signup-form-password-confirm-label" for="signup-form-password-confirm-input">Confirm Password:</label>
+				<input id="signup-form-password-confirm-input" 
+				type="password"
+				name="confirm-password"
+				autocomplete="current-password"
+				minlength="8"
+				pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+				required>
+			</fieldset>
+			<fieldset id="signup-form-first-name-container" class="form-container">
+				<label id="signup-form-first-name-label" for="signup-form-first-name-input">First Name:</label>
+				<input id="signup-first-name-confirm-input" 
+				type="text"
+				name="first-name"
+				required>
+			</fieldset>
+			<fieldset id="signup-form-last-name-container" class="form-container">
+				<label id="signup-form-last-name-label" for="signup-last-name-input">Last Name:</label>
+				<input id="signup-form-last-name-input" 
+				type="text"
+				name="last-name"
+				autocomplete="name"
+				required>
+			</fieldset>
+			<footer id="signup-buttons">
+				<button id="submit-signup-form" type="submit">Sign Up</button>
+				<a id="login-link" hx-get="/login" hx-target="#modal" hx-swap="outerHTML">Already have an account? Log In</a>
+			</footer>
+		</from>
+	</article>
+	<script src="js/token.js"></script>
+</dialog>
