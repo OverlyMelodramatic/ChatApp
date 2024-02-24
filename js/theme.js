@@ -4,8 +4,8 @@ let themeUrl = {
     'light': 'assets/moon.svg'
 }
 document.getElementById('theme-switch').setAttribute('src', themeUrl[theme]);
-document.getElementById('theme-switch').addEventListener('click', () => {
+document.getElementById('theme-switch').onclick = () => {
     theme = theme === 'dark' ? 'light' : 'dark';
     document.getElementById('theme-switch').setAttribute('src', themeUrl[theme]);
-    document.getElementById('main-page').setAttribute('data-theme', theme);
-});
+    document.getElementById('container').setAttribute('data-theme', theme);
+};

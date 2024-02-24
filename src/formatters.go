@@ -1,17 +1,18 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"os"
 	"time"
 )
 
-const (
-	DatetimeLayout = "2006-01-02T15:04:05.000Z"
-)
-
 func fomartAsTime(t string) (string, error) {
-	// TODO: export this layout in a constants file
-	var ti, err = time.Parse(DatetimeLayout, t)
+	layout, layoutDefined := os.LookupEnv("DATETIME_LAYOUT")
+	if !layoutDefined {
+		return "", errors.New("could not find the 'DATETIME_LAYOUT' environment variable")
+	}
+	var ti, err = time.Parse(layout, t)
 	if err != nil {
 		return "", err
 	}

@@ -6,3 +6,7 @@ services:
       - PORT=5200
     ports:
       - "80:5200"
+  
+  database:
+    container_name: mongo_db
+    image: mongodb/mongodb-community-server

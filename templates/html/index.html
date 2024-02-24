@@ -4,7 +4,11 @@
         <title>ChatApp</title>
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="charset" content="utf-8">
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="A web app to chat with your friends">
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+        
         <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="css/messages.css" media="screen" />
 
@@ -13,16 +17,16 @@
         <script src="https://unpkg.com/htmx.org@1.9.10" 
         integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" 
         crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+        <script defer src="js/theme.js"></script>
     </head>
     <body id="container" class="container" hx-get="/login" hx-target="this" hx-trigger="load once" hx-swap="beforeend">
-        <nav>
-            <ul>
+        <nav id="main-nav">
+            <ul id="nav-left-side">
                 <li>
                     <h1 id="app-title">ChatApp</h1>
                 </li>
             </ul>
-            <ul>
+            <ul id="nav-right-side">
                 <li>
                     <img id="theme-switch" alt="Toggle the theme" aria-label="Toggle the theme"/>
                 </li>
@@ -55,6 +59,7 @@
                 spellcheck="true"
                 onkeyup="if (this.value) {document.getElementById('send-button').removeAttribute('disabled')} else {document.getElementById('send-button').setAttribute('disabled', 'true');}"
                 required
+                aria-label="to send a message"
                 autocomplete="off">
                 <button id="send-button" 
                 value=""
@@ -64,5 +69,4 @@
             </div>
         </form>
     </body>
-    <script src="js/theme.js"></script>
 </html>

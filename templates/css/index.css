@@ -36,3 +36,20 @@ footer {
     align-items: center;
 }
 
+@keyframes Chat-app-fade-in {
+	0% {
+		opacity: 0;
+		transform: translateY(-250px);
+		rotate: rotate(180deg);
+	}
+    
+	100% {
+        opacity: 1;
+		transform: translateY(0);
+        rotate: rotate(0deg);
+	}
+}
+
+#theme-switch {
+    animation: Chat-app-fade-in 2s ease-in-out 0s 1 alternate forwards;
+}
